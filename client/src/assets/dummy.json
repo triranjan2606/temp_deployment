@@ -1,0 +1,83 @@
+[
+    {
+      "Timestamp": "2025-04-03 10:37:35",
+      "Latitude": 26.907674,
+      "Longitude": 75.787116,
+      "Microwave Doppler Sensor Value": 1.96,
+      "Gas Sensor Reading (PPM)": 381.28,
+      "Thermal Imaging Temperature (°C)": 28.05,
+      "Victim Detected": "No"
+    },
+    {
+      "Timestamp": "2025-04-03 10:37:45",
+      "Latitude": 26.917443,
+      "Longitude": 75.79074,
+      "Microwave Doppler Sensor Value": 1.26,
+      "Gas Sensor Reading (PPM)": 693.25,
+      "Thermal Imaging Temperature (°C)": 32.95,
+      "Victim Detected": "Yes"
+    },
+    {
+      "Timestamp": "2025-04-03 10:37:55",
+      "Latitude": 26.918606,
+      "Longitude": 75.794946,
+      "Microwave Doppler Sensor Value": 1.97,
+      "Gas Sensor Reading (PPM)": 746.74,
+      "Thermal Imaging Temperature (°C)": 34.44,
+      "Victim Detected": "Yes"
+    },
+    {
+      "Timestamp": "2025-04-03 10:38:05",
+      "Latitude": 26.91307,
+      "Longitude": 75.795657,
+      "Microwave Doppler Sensor Value": 1.22,
+      "Gas Sensor Reading (PPM)": 495.2,
+      "Thermal Imaging Temperature (°C)": 34.62,
+      "Victim Detected": "No"
+    },
+    {
+      "Timestamp": "2025-04-03 10:38:15",
+      "Latitude": 26.904807,
+      "Longitude": 75.778192,
+      "Microwave Doppler Sensor Value": 2.11,
+      "Gas Sensor Reading (PPM)": 433.6,
+      "Thermal Imaging Temperature (°C)": 33.9,
+      "Victim Detected": "Yes"
+    },
+    {
+      "Timestamp": "2025-04-03 10:38:25",
+      "Latitude": 26.904306,
+      "Longitude": 75.7844,
+      "Microwave Doppler Sensor Value": 0.36,
+      "Gas Sensor Reading (PPM)": 716.7,
+      "Thermal Imaging Temperature (°C)": 29.99,
+      "Victim Detected": "Yes"
+    },
+    {
+      "Timestamp": "2025-04-03 10:38:35",
+      "Latitude": 26.919821,
+      "Longitude": 75.797224,
+      "Microwave Doppler Sensor Value": 2.39,
+      "Gas Sensor Reading (PPM)": 628.49,
+      "Thermal Imaging Temperature (°C)": 36.97,
+      "Victim Detected": "Yes"
+    },
+    {
+      "Timestamp": "2025-04-03 10:38:45",
+      "Latitude": 26.918249,
+      "Longitude": 75.782616,
+      "Microwave Doppler Sensor Value": 0.61,
+      "Gas Sensor Reading (PPM)": 691.27,
+      "Thermal Imaging Temperature (°C)": 30.38,
+      "Victim Detected": "Yes"
+    },
+    {
+      "Timestamp": "2025-04-03 10:38:55",
+      "Latitude": 26.917467,
+      "Longitude": 75.784346,
+      "Microwave Doppler Sensor Value": 1.34,
+      "Gas Sensor Reading (PPM)": 621.04,
+      "Thermal Imaging Temperature (°C)": 30.5,
+      "Victim Detected": "Yes"
+    }
+]
