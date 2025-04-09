@@ -1,0 +1,12 @@
+{
+    "Timestamp": "2025-04-03 10:40:46",
+    "Latitude": 26.9091,
+    "Longitude": 75.7908,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": true,
+    "depth": 1,
+    "deviceId": "dev004",
+    "status": "Pending",
+    "assignedTeam": "Team Bravo"
+  }

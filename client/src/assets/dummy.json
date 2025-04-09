@@ -1,83 +1,182 @@
 [
-    {
-      "Timestamp": "2025-04-03 10:37:35",
-      "Latitude": 26.907674,
-      "Longitude": 75.787116,
-      "Microwave Doppler Sensor Value": 1.96,
-      "Gas Sensor Reading (PPM)": 381.28,
-      "Thermal Imaging Temperature (°C)": 28.05,
-      "Victim Detected": "No"
-    },
-    {
-      "Timestamp": "2025-04-03 10:37:45",
-      "Latitude": 26.917443,
-      "Longitude": 75.79074,
-      "Microwave Doppler Sensor Value": 1.26,
-      "Gas Sensor Reading (PPM)": 693.25,
-      "Thermal Imaging Temperature (°C)": 32.95,
-      "Victim Detected": "Yes"
-    },
-    {
-      "Timestamp": "2025-04-03 10:37:55",
-      "Latitude": 26.918606,
-      "Longitude": 75.794946,
-      "Microwave Doppler Sensor Value": 1.97,
-      "Gas Sensor Reading (PPM)": 746.74,
-      "Thermal Imaging Temperature (°C)": 34.44,
-      "Victim Detected": "Yes"
-    },
-    {
-      "Timestamp": "2025-04-03 10:38:05",
-      "Latitude": 26.91307,
-      "Longitude": 75.795657,
-      "Microwave Doppler Sensor Value": 1.22,
-      "Gas Sensor Reading (PPM)": 495.2,
-      "Thermal Imaging Temperature (°C)": 34.62,
-      "Victim Detected": "No"
-    },
-    {
-      "Timestamp": "2025-04-03 10:38:15",
-      "Latitude": 26.904807,
-      "Longitude": 75.778192,
-      "Microwave Doppler Sensor Value": 2.11,
-      "Gas Sensor Reading (PPM)": 433.6,
-      "Thermal Imaging Temperature (°C)": 33.9,
-      "Victim Detected": "Yes"
-    },
-    {
-      "Timestamp": "2025-04-03 10:38:25",
-      "Latitude": 26.904306,
-      "Longitude": 75.7844,
-      "Microwave Doppler Sensor Value": 0.36,
-      "Gas Sensor Reading (PPM)": 716.7,
-      "Thermal Imaging Temperature (°C)": 29.99,
-      "Victim Detected": "Yes"
-    },
-    {
-      "Timestamp": "2025-04-03 10:38:35",
-      "Latitude": 26.919821,
-      "Longitude": 75.797224,
-      "Microwave Doppler Sensor Value": 2.39,
-      "Gas Sensor Reading (PPM)": 628.49,
-      "Thermal Imaging Temperature (°C)": 36.97,
-      "Victim Detected": "Yes"
-    },
-    {
-      "Timestamp": "2025-04-03 10:38:45",
-      "Latitude": 26.918249,
-      "Longitude": 75.782616,
-      "Microwave Doppler Sensor Value": 0.61,
-      "Gas Sensor Reading (PPM)": 691.27,
-      "Thermal Imaging Temperature (°C)": 30.38,
-      "Victim Detected": "Yes"
-    },
-    {
-      "Timestamp": "2025-04-03 10:38:55",
-      "Latitude": 26.917467,
-      "Longitude": 75.784346,
-      "Microwave Doppler Sensor Value": 1.34,
-      "Gas Sensor Reading (PPM)": 621.04,
-      "Thermal Imaging Temperature (°C)": 30.5,
-      "Victim Detected": "Yes"
-    }
+  {
+    "Timestamp": "2025-04-03 10:37:35",
+    "Latitude": 26.9087,
+    "Longitude": 75.7871,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": true,
+    "depth": 4,
+    "deviceId": "dev001",
+    "status": "Pending",
+    "assignedTeam": "Team Alpha"
+  },
+  {
+    "Timestamp": "2025-04-03 10:38:21",
+    "Latitude": 26.9102,
+    "Longitude": 75.7896,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": false,
+    "depth": 2,
+    "deviceId": "dev002",
+    "status": "In Progress",
+    "assignedTeam": "Team Bravo"
+  },
+  {
+    "Timestamp": "2025-04-03 10:39:59",
+    "Latitude": 26.9063,
+    "Longitude": 75.7864,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": true,
+    "depth": 5,
+    "deviceId": "dev003",
+    "status": "Resolved",
+    "assignedTeam": "Team Charlie"
+  },
+  {
+    "Timestamp": "2025-04-03 10:40:46",
+    "Latitude": 26.9091,
+    "Longitude": 75.7908,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": true,
+    "depth": 1,
+    "deviceId": "dev004",
+    "status": "Pending",
+    "assignedTeam": "Team Bravo"
+  },
+  {
+    "Timestamp": "2025-04-03 10:42:02",
+    "Latitude": 26.9074,
+    "Longitude": 75.7839,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": false,
+    "depth": 3,
+    "deviceId": "dev001",
+    "status": "In Progress",
+    "assignedTeam": "Team Alpha"
+  },
+  {
+    "Timestamp": "2025-04-03 10:43:35",
+    "Latitude": 26.9058,
+    "Longitude": 75.7892,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": true,
+    "depth": 5,
+    "deviceId": "dev002",
+    "status": "Resolved",
+    "assignedTeam": "Team Charlie"
+  },
+  {
+    "Timestamp": "2025-04-03 10:45:17",
+    "Latitude": 26.9099,
+    "Longitude": 75.7841,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": true,
+    "depth": 2,
+    "deviceId": "dev003",
+    "status": "Pending",
+    "assignedTeam": "Team Bravo"
+  },
+  {
+    "Timestamp": "2025-04-03 10:46:48",
+    "Latitude": 26.9111,
+    "Longitude": 75.7912,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": false,
+    "depth": 0,
+    "deviceId": "dev004",
+    "status": "In Progress",
+    "assignedTeam": "Team Alpha"
+  },
+  {
+    "Timestamp": "2025-04-03 10:48:15",
+    "Latitude": 26.9124,
+    "Longitude": 75.7869,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": true,
+    "depth": 3,
+    "deviceId": "dev001",
+    "status": "Resolved",
+    "assignedTeam": "Team Charlie"
+  },
+  {
+    "Timestamp": "2025-04-03 10:49:42",
+    "Latitude": 26.9067,
+    "Longitude": 75.7923,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": false,
+    "depth": 1,
+    "deviceId": "dev002",
+    "status": "Pending",
+    "assignedTeam": "Team Bravo"
+  },
+  {
+    "Timestamp": "2025-04-03 10:51:09",
+    "Latitude": 26.9039,
+    "Longitude": 75.7888,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": true,
+    "depth": 4,
+    "deviceId": "dev003",
+    "status": "In Progress",
+    "assignedTeam": "Team Alpha"
+  },
+  {
+    "Timestamp": "2025-04-03 10:52:36",
+    "Latitude": 26.9080,
+    "Longitude": 75.7813,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": false,
+    "depth": 2,
+    "deviceId": "dev004",
+    "status": "Resolved",
+    "assignedTeam": "Team Charlie"
+  },
+  {
+    "Timestamp": "2025-04-03 10:54:03",
+    "Latitude": 26.9107,
+    "Longitude": 75.7856,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": true,
+    "depth": 3,
+    "deviceId": "dev001",
+    "status": "Pending",
+    "assignedTeam": "Team Bravo"
+  },
+  {
+    "Timestamp": "2025-04-03 10:55:30",
+    "Latitude": 26.9120,
+    "Longitude": 75.7881,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": true,
+    "depth": 5,
+    "deviceId": "dev002",
+    "status": "In Progress",
+    "assignedTeam": "Team Alpha"
+  },
+  {
+    "Timestamp": "2025-04-03 10:56:57",
+    "Latitude": 26.9050,
+    "Longitude": 75.7850,
+    "detectedInMicrowaveDopler": false,
+    "harmfulGasDetected": false,
+    "detectedInThermalImage": false,
+    "depth": 0,
+    "deviceId": "dev003",
+    "status": "Resolved",
+    "assignedTeam": "Team Charlie"
+  }
 ]

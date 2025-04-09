@@ -1,0 +1,12 @@
+{
+    "Timestamp": "2025-04-03 10:43:35",
+    "Latitude": 26.9058,
+    "Longitude": 75.7892,
+    "detectedInMicrowaveDopler": true,
+    "harmfulGasDetected": true,
+    "detectedInThermalImage": true,
+    "depth": 5,
+    "deviceId": "dev002",
+    "status": "Resolved",
+    "assignedTeam": "Team Charlie"
+  }
