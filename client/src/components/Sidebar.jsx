@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="w-1/4 bg-white flex flex-col py-5">
+      <div className="w-1/6 bg-white flex flex-col py-5">
         {fields.map((field,index) => (
           <>
             {field.isActive ? (

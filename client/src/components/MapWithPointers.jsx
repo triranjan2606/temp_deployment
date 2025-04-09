@@ -6,10 +6,10 @@ import { divIcon, Icon, point } from "leaflet";
 import marker from "../assets/marker.png";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
-const MapWithPointers = () => {
+const MapWithPointers = ({ cases }) => {
   const customIcon = new Icon({
     iconUrl: marker,
-    iconSize: [38, 38],
+    iconSize: [40, 40],
   });
   // custom cluster icon
   const createClusterCustomIcon = function (cluster) {
@@ -21,33 +21,55 @@ const MapWithPointers = () => {
   };
   return (
     <>
-      <MapContainer
-        center={[26.917443, 75.79074]}
-        zoom={15}
-        scrollWheelZoom={false}
-        style={{ height: "100%", width: "100%" }}
-        className="h-full w-full"
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <MarkerClusterGroup
-          chunkedLoading
-          iconCreateFunction={createClusterCustomIcon}
+      {cases.length > 0 ? (
+        <MapContainer
+          center={[
+            cases[0]?.data.nodes[0].gps.latitude,
+            cases[0]?.data.nodes[0].gps.longitude,
+          ]}
+          zoom={16}
+          scrollWheelZoom={true}
+          style={{ height: "100%", width: "100%" }}
+          className="h-full w-full"
         >
-          {dummy.map((data, index) => (
-            <Marker
-              position={[data.Latitude, data.Longitude]}
-              icon={customIcon}
-            >
-              <Popup>
-                Case Id : {index+1} <br /> Status : Pending
-              </Popup>
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
-      </MapContainer>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <MarkerClusterGroup
+            chunkedLoading
+            iconCreateFunction={createClusterCustomIcon}
+          >
+            {cases.map((data, caseIndex) =>
+              data.data.nodes.map((node, nodeIndex) => (
+                <Marker
+                  key={`${caseIndex}-${node.node_id}`}
+                  position={[node.gps.latitude, node.gps.longitude]}
+                  icon={customIcon}
+                >
+                  <Popup>
+                    <div>
+                      <strong>Case ID:</strong> {caseIndex + 1}
+                      <br />
+                      <strong>Node:</strong> {node.node_id}
+                      <br />
+                      <strong>Doppler:</strong> {node.doppler_speed}
+                      <br />
+                      <strong>Gas PPM:</strong> {node.gas_ppm}
+                      <br />
+                      <strong>Temp (°C):</strong> {node.temperature}
+                      <br />
+                      <strong>Status:</strong> {data.victim_status}
+                    </div>
+                  </Popup>
+                </Marker>
+              ))
+            )}
+          </MarkerClusterGroup>
+        </MapContainer>
+      ) : (
+        ""
+      )}
     </>
   );
 };
