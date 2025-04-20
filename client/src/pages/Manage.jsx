@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import MapWithPointers from "../components/MapWithPointers";
 import { LuRefreshCcw } from "react-icons/lu";
 import { IoFilter } from "react-icons/io5";
@@ -7,13 +8,16 @@ import axios from "axios";
 import PulseLoader from "../util/PulseLoader";
 import WhiteSpinner from "../util/WhiteSpinner";
 import ListItem from "../components/ListItem";
+import { Switch } from "@headlessui/react";
+import { useCases } from "../context/CasesContext";
+import showToastMessage from "../util/Toast";
 
 const Manage = () => {
   // format time
-
+  const { dCases, setDCases } = useCases();
   const [cases, setCases] = useState([]);
-  console.log(cases);
-  
+  // console.log(cases);
+
   const [fetchAgain, setFetchAgain] = useState(false);
 
   // const [cases, setCases] = useState([
@@ -270,6 +274,36 @@ const Manage = () => {
   // ]);
 
   const [loading, setLoading] = useState(false);
+  const [isSorted,setIsSorted]= useState(false);
+
+  const [isHeatmap, setIsHeatmap] = useState(false);
+  const handleToggle = () => {
+    setIsHeatmap((prev) => !prev);
+    onToggle(!isHeatmap); // Pass value to parent
+  };
+  // const sortedCases = (() => {
+  //   const inRange = [];
+  //   const outOfRange = [];
+  
+  //   cases.forEach((item) => {
+  //     const speed = item.data?.nodes?.[0]?.doppler_speed;
+  
+  //     if (speed >= 3 && speed <= 7) {
+  //       inRange.push(item);
+  //     } else {
+  //       outOfRange.push(item);
+  //     }
+  //   });
+  
+  //   // Sort the inRange array based on doppler_speed
+  //   inRange.sort(
+  //     (a, b) => a.data.nodes[0].doppler_speed - b.data.nodes[0].doppler_speed
+  //   );
+  
+  //   setCases([...inRange, ...outOfRange]);
+  // })();
+  
+
   const getAllData = async () => {
     try {
       setLoading(true);
@@ -279,23 +313,25 @@ const Manage = () => {
         },
       };
       const { data } = await axios.get(
+        // `/api/json-files`,
         `/api/json-files`,
-        // `http://localhost:5000/api/json-files`,
         config
       );
-      console.log("data",data);
+      console.log("data", data);
       if (data.success) {
         setCases(data.data);
+        setDCases(data.data);
         setLoading(false);
+        setIsSorted(!isSorted);
         return;
       } else {
-        // showToastMessage("error", data.message);
-        console.log("success false")
+        showToastMessage("error", "failed");
+        console.log("success false");
         setLoading(false);
       }
     } catch (error) {
       // showToastMessage("error", `${error}`);
-      console.error(error)
+      console.error(error);
       setLoading(false);
     }
   };
@@ -312,18 +348,16 @@ const Manage = () => {
         config
       );
       console.log(data);
-    
     } catch (error) {
       // showToastMessage("error", `${error}`);
-      console.error(error)
+      console.error(error);
     }
   };
   useEffect(() => {
     getAllData();
     test();
-  }, [fetchAgain]);
-
-
+  }, []);
+  
 
   return (
     <>
@@ -336,7 +370,8 @@ const Manage = () => {
               <WhiteSpinner size={"large"} />
             ) : (
               <LuRefreshCcw
-                className="text-2xl cursor-pointer" onClick={()=> setFetchAgain(!fetchAgain)}
+                className="text-2xl cursor-pointer"
+                onClick={() => setFetchAgain(!fetchAgain)}
               />
             )}
 
@@ -350,6 +385,7 @@ const Manage = () => {
                   // data.data.detectedInThermalImage ||
                   // data.data.harmfulGasDetected ? (
                   <ListItem data={data.data} index={index} />
+                  // <ListItem data={data.data} index={index} />
                 )
                 // ) : null
               )}
@@ -364,10 +400,29 @@ const Manage = () => {
               Loading maps for you...
             </div>
           ) : (
-            <MapWithPointers cases={cases} />
+            <div className="w-full flex flex-col">
+              {/* Floating div above the map */}
+              <div className="flex gap-3 w-full justify-center items-center py-2">
+                <p className="text-xl font-thin text-blue-600">Pointers</p>
+                <Switch
+                  checked={isHeatmap}
+                  onChange={() => handleToggle()}
+                  className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-blue-600  cursor-pointer"
+                >
+                  <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
+                </Switch>
+                <p className="text-xl font-thin text-blue-600">Heatmap</p>
+              </div>
+
+              {/* Map container */}
+              <div className="w-full h-full">
+                <MapWithPointers cases={cases} isHeatmap={isHeatmap} />
+              </div>
+            </div>
           )}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { MdDashboard } from "react-icons/md";
 import { MdManageAccounts } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
+import { GrInProgress } from "react-icons/gr";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -18,6 +19,12 @@ const Sidebar = () => {
       route: `manage`,
       icon: <MdManageAccounts />,
       isActive: currentPath.includes("manage"),
+    },
+    {
+      name: "Progress",
+      route: `progress`,
+      icon: <GrInProgress />,
+      isActive: currentPath.includes("progress"),
     },
   ];
 

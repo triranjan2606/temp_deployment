@@ -6,10 +6,15 @@ import { IoLocationOutline } from "react-icons/io5";
 import gasSensor from "../assets/gas_sensor.png";
 import thermalSensor from "../assets/thermal.png";
 import device from "../assets/device.png";
+import { useNavigate } from "react-router-dom"
 
 const ListItem = ({ data, index }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/managee", { state: data.nodes[0] });
+  };
   const formatExactTime = (datetimeStr) => {
-    console.log(datetimeStr);
+    // console.log(datetimeStr);
 
     const date = new Date(datetimeStr.replace(" ", "T")); // Convert to ISO format
 
@@ -38,13 +43,13 @@ const ListItem = ({ data, index }) => {
 
     return `${time} `;
   };
-  console.log(data);
+  // console.log("dd",data);
 
   return (
     <>
       <div
         className="flex bg-white w-full p-2 rounded-md shadow-md cursor-pointer hover:opacity-85"
-        key={index}
+        key={index} onClick={()=>handleClick()}
       >
         <div className="flex w-1/4 h-full items-center text-blue-600 gap-2">
           <MdAccessTime className=" text-2xl" />
@@ -67,28 +72,29 @@ const ListItem = ({ data, index }) => {
               <img src={thermalSensor} className=" h-5  w-fit" />
             </div>
           </div>
-          {data.nodes.map((key,index)=>(
+          {/* {data.map((key,index)=>( */}
               <>
               <div className="flex gap-1 w-full">
                 <p className="w-1/6 flex items-center justify-center text-sm font-thin text-blue-600">
-                  Node {index+1}
+                  Node 1 
+                  {/* //{index+1} */}
                 </p>
                 <p className="w-2/6 flex items-center justify-center text-xs font-thin text-blue-600">
-                  [{key.gps.latitude},
-                  {key.gps.longitude}]
+                  [{data.nodes[0].gps.latitude},
+                  {data.nodes[0].gps.longitude}]
                 </p>
                 <p className="w-1/6 flex items-center justify-center text-sm font-thin text-blue-600">
-                  {key.doppler_speed}
+                  {data.nodes[0].doppler_speed}
                 </p>
                 <p className="w-1/6 flex items-center justify-center text-sm font-thin text-blue-600">
-                  {key.gas_ppm}
+                  {data.nodes[0].gas_ppm}
                 </p>
                 <p className="w-1/6 flex items-center justify-center text-sm font-thin text-blue-600">
-                  {key.temperature}
+                  {data.nodes[0].temperature}
                 </p>
               </div>
             </>
-          ))}
+          {/* ))} */}
         </div>
       </div>
     </>

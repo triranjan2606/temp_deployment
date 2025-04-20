@@ -5,8 +5,11 @@ import dummy from "../assets/dummy.json";
 import { divIcon, Icon, point } from "leaflet";
 import marker from "../assets/marker.png";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import { HeatmapLayer } from "react-leaflet-heatmap-layer-v3";
 
-const MapWithPointers = ({ cases }) => {
+const MapWithPointers = ({ cases, isHeatmap }) => {
+  // console.log("sa",cases);
+  
   const customIcon = new Icon({
     iconUrl: marker,
     iconSize: [40, 40],
@@ -19,6 +22,29 @@ const MapWithPointers = ({ cases }) => {
       iconSize: point(33, 33, true),
     });
   };
+  const heatmapCountMap = {};
+  // 🔥 Step 1: Count victims per location
+  cases.forEach((item) => {
+    item.data?.nodes?.forEach((node) => {
+      const lat = node.gps.latitude;
+      const lng = node.gps.longitude;
+      const key = `${lat},${lng}`;
+
+      if (heatmapCountMap[key]) {
+        heatmapCountMap[key].intensity += 1; // You can use node.gas_ppm or other metric if preferred
+      } else {
+        heatmapCountMap[key] = {
+          lat,
+          lng,
+          intensity: 1,
+        };
+      }
+    });
+  });
+
+  const heatmapPoints = Object.values(heatmapCountMap);
+  // console.log("Heatmap Points:", heatmapPoints);
+
   return (
     <>
       {cases.length > 0 ? (
@@ -26,6 +52,8 @@ const MapWithPointers = ({ cases }) => {
           center={[
             cases[0]?.data.nodes[0].gps.latitude,
             cases[0]?.data.nodes[0].gps.longitude,
+            // cases[0]?.nodes[0].gps.latitude,
+            // cases[0]?.nodes[0].gps.longitude,
           ]}
           zoom={16}
           scrollWheelZoom={true}
@@ -36,36 +64,45 @@ const MapWithPointers = ({ cases }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <MarkerClusterGroup
-            chunkedLoading
-            iconCreateFunction={createClusterCustomIcon}
-          >
-            {cases.map((data, caseIndex) =>
-              data.data.nodes.map((node, nodeIndex) => (
-                <Marker
-                  key={`${caseIndex}-${node.node_id}`}
-                  position={[node.gps.latitude, node.gps.longitude]}
-                  icon={customIcon}
-                >
-                  <Popup>
-                    <div>
-                      <strong>Case ID:</strong> {caseIndex + 1}
-                      <br />
-                      <strong>Node:</strong> {node.node_id}
-                      <br />
-                      <strong>Doppler:</strong> {node.doppler_speed}
-                      <br />
-                      <strong>Gas PPM:</strong> {node.gas_ppm}
-                      <br />
-                      <strong>Temp (°C):</strong> {node.temperature}
-                      <br />
-                      <strong>Status:</strong> {data.victim_status}
-                    </div>
-                  </Popup>
-                </Marker>
-              ))
-            )}
-          </MarkerClusterGroup>
+          {isHeatmap ? (
+            <HeatmapLayer
+              fitBoundsOnLoad
+              fitBoundsOnUpdate
+              points={heatmapPoints}
+              longitudeExtractor={(m) => m.lng}
+              latitudeExtractor={(m) => m.lat}
+              intensityExtractor={(m) => m.intensity}
+              radius={40}
+              blur={15}
+              max={5}
+            />
+          ) : (
+            // <MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}>
+            <>
+              {cases.map((item, i) =>
+                // item.data?.nodes?.map((node, j) => (
+                  <Marker
+                    // key={`${i}-${j}`}
+                    position={[item.data.nodes[0].gps.latitude, item.data.nodes[0].gps.longitude]}
+                    icon={customIcon}
+                  >
+                    {/* <Popup>
+                      <div>
+                        <strong>Node:</strong> {node.node_id}
+                        <br />
+                        <strong>Status:</strong> {item.data.victim_status}
+                        <br />
+                        <strong>Gas PPM:</strong> {node.gas_ppm}
+                        <br />
+                        <strong>Temp:</strong> {node.temperature}°C
+                      </div>
+                    </Popup> */}
+                  </Marker>
+                // ))
+              )}
+            </>
+            // </MarkerClusterGroup>
+          )}
         </MapContainer>
       ) : (
         ""
