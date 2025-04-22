@@ -61,7 +61,8 @@ app.get("/api/json-files", async (req, res) => {
     }
 
 
-    const jsonFiles = listedObjects.Contents.filter(obj => obj.Key.endsWith(".json")).slice(0, 20); // Only first 20 files
+    const jsonFiles = listedObjects.Contents.filter(obj => obj.Key.endsWith(".json"))
+    //.slice(0, 20); // Only first 20 files
     console.log("processing.....");
     
 

@@ -13,6 +13,10 @@ import { useCases } from "../context/CasesContext";
 import showToastMessage from "../util/Toast";
 
 const Manage = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    return <p className="p-4 text-red-500">You must log in first.</p>;
+  }
   // format time
   const { dCases, setDCases } = useCases();
   const [cases, setCases] = useState([]);
@@ -274,7 +278,7 @@ const Manage = () => {
   // ]);
 
   const [loading, setLoading] = useState(false);
-  const [isSorted,setIsSorted]= useState(false);
+  const [isSorted, setIsSorted] = useState(false);
 
   const [isHeatmap, setIsHeatmap] = useState(false);
   const handleToggle = () => {
@@ -284,25 +288,24 @@ const Manage = () => {
   // const sortedCases = (() => {
   //   const inRange = [];
   //   const outOfRange = [];
-  
+
   //   cases.forEach((item) => {
   //     const speed = item.data?.nodes?.[0]?.doppler_speed;
-  
+
   //     if (speed >= 3 && speed <= 7) {
   //       inRange.push(item);
   //     } else {
   //       outOfRange.push(item);
   //     }
   //   });
-  
+
   //   // Sort the inRange array based on doppler_speed
   //   inRange.sort(
   //     (a, b) => a.data.nodes[0].doppler_speed - b.data.nodes[0].doppler_speed
   //   );
-  
+
   //   setCases([...inRange, ...outOfRange]);
   // })();
-  
 
   const getAllData = async () => {
     try {
@@ -353,11 +356,16 @@ const Manage = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
-    getAllData();
-    test();
-  }, []);
-  
+    getAllData(); // Initial call
+
+    const interval = setInterval(() => {
+      getAllData();
+    }, 5000); // every 5 seconds
+
+    return () => clearInterval(interval); // cleanup
+  }, [fetchAgain]);
 
   return (
     <>
@@ -377,49 +385,49 @@ const Manage = () => {
 
             <IoFilter className="text-2xl cursor-pointer" />
           </div>
-          {!loading ? (
-            <>
-              {cases.map(
-                (data, index) => (
-                  // data.data.detectedInMicrowaveDopler ||
-                  // data.data.detectedInThermalImage ||
-                  // data.data.harmfulGasDetected ? (
-                  <ListItem data={data.data} index={index} />
-                  // <ListItem data={data.data} index={index} />
-                )
-                // ) : null
-              )}
-            </>
-          ) : (
-            <PulseLoader repeat={10} />
-          )}
+          {/* {!loading ? ( */}
+          <>
+            {cases.map(
+              (data, index) => (
+                // data.data.detectedInMicrowaveDopler ||
+                // data.data.detectedInThermalImage ||
+                // data.data.harmfulGasDetected ? (
+                <ListItem data={data.data} index={index} />
+                // <ListItem data={data.data} index={index} />
+              )
+              // ) : null
+            )}
+          </>
+          {/* ) : ( */}
+          {/* <PulseLoader repeat={10} /> */}
+          {/* )} */}
         </div>
         <div className="flex w-6/12  min-h-dvh">
-          {loading ? (
+          {/* {loading ? (
             <div className="flex h-full w-full items-center justify-center text-xl text-blue-600 font-thin">
               Loading maps for you...
             </div>
-          ) : (
-            <div className="w-full flex flex-col">
-              {/* Floating div above the map */}
-              <div className="flex gap-3 w-full justify-center items-center py-2">
-                <p className="text-xl font-thin text-blue-600">Pointers</p>
-                <Switch
-                  checked={isHeatmap}
-                  onChange={() => handleToggle()}
-                  className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-blue-600  cursor-pointer"
-                >
-                  <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
-                </Switch>
-                <p className="text-xl font-thin text-blue-600">Heatmap</p>
-              </div>
-
-              {/* Map container */}
-              <div className="w-full h-full">
-                <MapWithPointers cases={cases} isHeatmap={isHeatmap} />
-              </div>
+          ) : ( */}
+          <div className="w-full flex flex-col">
+            {/* Floating div above the map */}
+            <div className="flex gap-3 w-full justify-center items-center py-2">
+              <p className="text-xl font-thin text-blue-600">Pointers</p>
+              <Switch
+                checked={isHeatmap}
+                onChange={() => handleToggle()}
+                className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-blue-600  cursor-pointer"
+              >
+                <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
+              </Switch>
+              <p className="text-xl font-thin text-blue-600">Heatmap</p>
             </div>
-          )}
+
+            {/* Map container */}
+            <div className="w-full h-full">
+              <MapWithPointers cases={cases} isHeatmap={isHeatmap} />
+            </div>
+          </div>
+          {/* )} */}
         </div>
       </div>
       <ToastContainer />
