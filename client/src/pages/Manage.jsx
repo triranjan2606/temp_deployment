@@ -316,8 +316,8 @@ const Manage = () => {
         },
       };
       const { data } = await axios.get(
-        // `/api/json-files`,
         `/api/json-files`,
+        // `http://localhost:5000/api/json-files`,
         config
       );
       console.log("data", data);
@@ -373,7 +373,7 @@ const Manage = () => {
         <div className="flex flex-col w-6/12 bg-blue-100 min-h-dvh max-h-screen p-5 gap-3 overflow-y-auto">
           {/* header */}
           <div className="flex items-center justify-center gap-4 bg-blue-600 text-white w-full p-2 rounded-md shadow-md sticky top-0 z-30">
-            <p className="text-xl font-bold">Detected Cases</p>
+            <p className="text-xl font-bold">Priority List</p>
             {loading ? (
               <WhiteSpinner size={"large"} />
             ) : (
